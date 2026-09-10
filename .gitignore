@@ -1,0 +1,23 @@
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/vite.log
+
+# Backend build tools and output
+backend/.tools/
+backend/target/
+backend/data/
+backend/*.log
+
+# Local settings and secrets
+.env
+.env.*
+!*.example
+backend/src/main/resources/application-local.properties
+
+# Editor and operating system files
+.vscode/
+.idea/
+*.iml
+Thumbs.db
+Desktop.ini
