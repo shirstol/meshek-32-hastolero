@@ -20,6 +20,7 @@ public final class ApiDtos {
  public record OrderItemResponse(String productId, String productName, BigDecimal unitPrice, int quantity) { }
  public record OrderResponse(Long id, String orderNumber, CustomerResponse customer, DistributionPointResponse distributionPoint, List<OrderItemResponse> items, BigDecimal total, OrderStatus status, boolean packed, String adminNote, PaymentMethod paymentMethod, PaymentStatus paymentStatus, Instant createdAt) { }
  public record AdminOrderUpdate(@NotNull OrderStatus status, boolean packed, @Size(max = 2000) String adminNote) { }
- public record DashboardResponse(long totalOrders, long packedOrders, long openOrders, BigDecimal totalRevenue, List<PickupSummary> byPickupPoint) { }
+ public record DashboardResponse(long totalOrders, long packedOrders, long openOrders, BigDecimal totalRevenue, List<PickupSummary> byPickupPoint, List<ProductSummary> byProduct) { }
  public record PickupSummary(String distributionPointId, String distributionPointName, long orders, BigDecimal revenue) { }
+ public record ProductSummary(String productId, String productName, long quantity) { }
 }
