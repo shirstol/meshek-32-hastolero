@@ -3,4 +3,6 @@ export type DistributionPoint = {
   locality: string
   name: string
   details: string
+  slug?: string | null
+  aboutText?: string | null
 }

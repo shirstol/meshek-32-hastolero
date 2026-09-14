@@ -10,4 +10,5 @@ public class AdminController { private final OrderService orders; public AdminCo
  @GetMapping("/orders") public List<OrderResponse> orders(@RequestParam(required=false) String pickupPointId,@RequestParam(required=false) String productId,@RequestParam(required=false) String customerQuery,@RequestParam(required=false) Boolean packed,@RequestParam(required=false) OrderStatus status){return orders.findOrders(pickupPointId,productId,customerQuery,packed,status);}
  @PatchMapping("/orders/{id}") public OrderResponse update(@PathVariable Long id,@Valid @RequestBody AdminOrderUpdate request){return orders.updateAdminOrder(id,request);}
  @GetMapping("/dashboard") public DashboardResponse dashboard(@RequestParam(required=false) String pickupPointId){return orders.dashboard(pickupPointId);}
+ @PostMapping("/stores/{slug}/products") public ProductResponse addProduct(@PathVariable String slug,@Valid @RequestBody AdminStoreProductRequest request){return orders.addProductToStore(slug,request);}
 }

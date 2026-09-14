@@ -11,7 +11,9 @@ export function ProductCard({ product, quantityInCart, onAddToCart }: ProductCar
 
   return (
     <article className="product-card">
-      <div className="product-card__image" aria-hidden="true">🥬</div>
+      <div className="product-card__image" aria-hidden="true">
+        {product.imageUrl ? <img src={product.imageUrl} alt="" /> : <span>{product.category === 'מן הגינה' ? '🍋' : '🥬'}</span>}
+      </div>
       <div className="product-card__body">
         <p className={product.available ? 'availability availability--available' : 'availability'}>
           {product.available ? 'זמין השבוע' : 'אזל מהמלאי'}

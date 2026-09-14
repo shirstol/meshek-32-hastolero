@@ -6,8 +6,9 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 @RestController @RequestMapping("/api")
 public class CatalogController {
- private final ProductRepository products; private final DistributionPointRepository points;
- public CatalogController(ProductRepository products,DistributionPointRepository points){this.products=products;this.points=points;}
+ private final ProductRepository products; private final DistributionPointRepository points; private final OrderService orders;
+ public CatalogController(ProductRepository products,DistributionPointRepository points,OrderService orders){this.products=products;this.points=points;this.orders=orders;}
  @GetMapping("/products") public List<ProductResponse> products(){return products.findAll().stream().map(OrderService::productResponse).toList();}
  @GetMapping("/distribution-points") public List<DistributionPointResponse> points(){return points.findByActiveTrueOrderByLocalityAsc().stream().map(OrderService::pointResponse).toList();}
+ @GetMapping("/stores/{slug}") public StoreCatalogResponse store(@PathVariable String slug){return orders.storeCatalog(slug);}
 }

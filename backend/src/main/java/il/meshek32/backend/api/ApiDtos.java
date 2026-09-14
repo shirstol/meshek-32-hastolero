@@ -9,8 +9,11 @@ public final class ApiDtos {
  private ApiDtos() { }
  public record CustomerRequest(@NotBlank @Size(max = 120) String fullName, @NotBlank @Size(max = 30) String phone) { }
  public record CustomerResponse(Long id, String fullName, String phone) { }
- public record ProductResponse(String id, String name, String description, BigDecimal price, boolean available, Integer maxQuantity) { }
+ public record ProductResponse(String id, String name, String description, String category, String imageUrl, BigDecimal price, boolean available, Integer maxQuantity) { }
  public record DistributionPointResponse(String id, String locality, String name, String details) { }
+ public record StoreResponse(String id, String slug, String locality, String name, String details, String aboutText) { }
+ public record StoreCatalogResponse(StoreResponse store, List<ProductResponse> products) { }
+ public record AdminStoreProductRequest(@NotBlank @Size(max=120) String name, @NotBlank @Size(max=400) String description, @NotBlank @Size(max=80) String category, @Size(max=1000) String imageUrl, @NotNull @DecimalMin("0.01") BigDecimal price, boolean available, @Min(1) Integer maxQuantity) { }
  public record OrderItemRequest(@NotBlank String productId, @Min(1) @Max(100) int quantity) { }
  public record CreateOrderRequest(@Valid @NotNull CustomerRequest customer, @NotBlank String distributionPointId, @NotEmpty List<@Valid OrderItemRequest> items, @NotNull PaymentMethod paymentMethod) { }
  public record OrderItemResponse(String productId, String productName, BigDecimal unitPrice, int quantity) { }

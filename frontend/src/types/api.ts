@@ -27,4 +27,5 @@ export type Dashboard = {
   totalRevenue: number
   byPickupPoint: { distributionPointId: string; distributionPointName: string; orders: number; revenue: number }[]
 }
+export type StoreCatalog = { store: { id: string; slug: string; locality: string; name: string; details: string; aboutText: string | null }; products: Product[] }
 export type { Product }

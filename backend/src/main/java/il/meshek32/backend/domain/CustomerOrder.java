@@ -38,7 +38,7 @@ public class CustomerOrder {
     public CustomerOrder(String orderNumber, Customer customer, DistributionPoint distributionPoint, BigDecimal total, PaymentMethod paymentMethod) {
         this.orderNumber = orderNumber; this.customer = customer; this.distributionPoint = distributionPoint; this.total = total; this.paymentMethod = paymentMethod;
     }
-    public void addItem(Product product, int quantity) { items.add(new OrderItem(this, product.getId(), product.getName(), product.getPrice(), quantity)); }
+    public void addItem(Product product, BigDecimal price, int quantity) { items.add(new OrderItem(this, product.getId(), product.getName(), price, quantity)); }
     public Long getId() { return id; }
     public String getOrderNumber() { return orderNumber; }
     public Customer getCustomer() { return customer; }
