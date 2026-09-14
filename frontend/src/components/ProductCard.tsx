@@ -11,7 +11,7 @@ export function ProductCard({ product, quantityInCart, onAddToCart }: ProductCar
 
   return (
     <article className="product-card">
-      <div className="product-card__image" aria-hidden="true">
+      <div className={`product-card__image ${product.id === 'green-salanova' ? 'product-card__image--left' : ''}`} aria-hidden="true">
         {product.imageUrl ? <img src={product.imageUrl} alt="" /> : <span>{product.category === 'מן הגינה' ? '🍋' : '🥬'}</span>}
       </div>
       <div className="product-card__body">

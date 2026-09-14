@@ -5,11 +5,12 @@ import type { Product } from '../types/product'
 const API_URL = 'http://127.0.0.1:8080/api'
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(`${API_URL}${path}`, { headers: { 'Content-Type': 'application/json', ...options?.headers }, ...options })
+  const response = await fetch(`${API_URL}${path}`, { ...options, headers: { 'Content-Type': 'application/json', ...options?.headers } })
   if (!response.ok) {
     const message = await response.text()
     throw new Error(message || 'פעולת השרת נכשלה')
   }
+  if (!(response.headers.get('content-type') || '').includes('application/json')) return undefined as T
   return response.json() as Promise<T>
 }
 
@@ -23,4 +24,7 @@ export const api = {
   dashboard: (credentials: string, pickupPointId = '') => request<Dashboard>(`/admin/dashboard?${new URLSearchParams(pickupPointId ? { pickupPointId } : {}).toString()}`, { headers: { Authorization: `Basic ${credentials}` } }),
   updateOrder: (credentials: string, id: number, status: OrderStatus, packed: boolean, adminNote: string) => request<Order>(`/admin/orders/${id}`, { method: 'PATCH', headers: { Authorization: `Basic ${credentials}` }, body: JSON.stringify({ status, packed, adminNote }) }),
   addStoreProduct: (credentials: string, slug: string, input: { name: string; description: string; category: string; imageUrl: string; price: number; available: boolean; maxQuantity: number | null }) => request<Product>(`/admin/stores/${slug}/products`, { method: 'POST', headers: { Authorization: `Basic ${credentials}` }, body: JSON.stringify(input) }),
+  updateStoreProduct: (credentials: string, slug: string, productId: string, input: { name: string; description: string; category: string; imageUrl: string; price: number; available: boolean; maxQuantity: number | null }) => request<Product>(`/admin/stores/${slug}/products/${productId}`, { method: 'PATCH', headers: { Authorization: `Basic ${credentials}` }, body: JSON.stringify(input) }),
+  removeStoreProduct: (credentials: string, slug: string, productId: string) => request<void>(`/admin/stores/${slug}/products/${productId}`, { method: 'DELETE', headers: { Authorization: `Basic ${credentials}` } }),
+  uploadImage: async (credentials: string, image: File) => { const data = new FormData(); data.append('image', image); const response = await fetch(`${API_URL}/admin/uploads`, { method: 'POST', headers: { Authorization: `Basic ${credentials}` }, body: data }); if (!response.ok) throw new Error(await response.text()); const result = await response.json() as { imageUrl: string }; return `${API_URL}${result.imageUrl}` },
 }

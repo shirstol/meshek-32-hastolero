@@ -7,6 +7,7 @@ frontend/vite.log
 backend/.tools/
 backend/target/
 backend/data/
+backend/uploads/
 backend/*.log
 
 # Local settings and secrets

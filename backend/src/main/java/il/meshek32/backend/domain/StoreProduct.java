@@ -11,5 +11,6 @@ public class StoreProduct {
  private Integer maxQuantity;
  protected StoreProduct(){}
  public StoreProduct(DistributionPoint store,Product product,BigDecimal price,boolean available,Integer maxQuantity){this.store=store;this.product=product;this.price=price;this.available=available;this.maxQuantity=maxQuantity;}
+ public void updateOffer(BigDecimal price,boolean available,Integer maxQuantity){this.price=price;this.available=available;this.maxQuantity=maxQuantity;}
  public DistributionPoint getStore(){return store;} public Product getProduct(){return product;} public BigDecimal getPrice(){return price;} public boolean isAvailable(){return available;} public Integer getMaxQuantity(){return maxQuantity;}
 }

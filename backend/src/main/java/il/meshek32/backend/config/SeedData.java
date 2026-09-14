@@ -15,7 +15,7 @@ import org.springframework.context.annotation.*;
    add(products,storeProducts,store,"green-salanova","חסה סלנובה ירוקה - מעולה לסלטי עלים","חסות ועלים ירוקים","חסה ירוקה ועדינה לסלטי עלים.","/images/salnova.png","10.00");
    add(products,storeProducts,store,"baby-arugula","רוקט בייבי מארז של 100 גרם","חסות ועלים ירוקים","עלים צעירים ורכים בטעם נדיר, לכריכים, סלטים ותבלון.",null,"10.00");
    add(products,storeProducts,store,"colorful-salanova","חסה סלנובה צבעונית - מוסיפה גוונים לכל סלט","חסות ועלים ירוקים","סלנובה צבעונית טרייה.",null,"10.00");
-   add(products,storeProducts,store,"leek-leaves","עלי ליק תמוז מארז של 300 גרם","חסות ועלים ירוקים","מארז עלי ליק טריים.",null,"10.00");
+   add(products,storeProducts,store,"leek-leaves","עלי ליק בתפזורת","חסות ועלים ירוקים","עלי ליק טריים בתפזורת.",null,"10.00");
    add(products,storeProducts,store,"passionfruit-bamba","פסיפלורה במבה בטעם אקזוטי - מארז 400 גרם","מן הגינה","פסיפלורה במבה בטעם אקזוטי.","/images/passionfruit.png","20.00");
    add(products,storeProducts,store,"pecan","פקאן ענק במארז של 0.5 ק\"ג","מן הגינה","פקאנים גדולים מאוד, ללא ריסוס והדברה.","/images/pecan.png","25.00");
    add(products,storeProducts,store,"rosemary","גבעולי רוזמרין טרי","מן הגינה","זר רוזמרין במשקל 50 גרם.","/images/rosemary.png","7.00");
@@ -29,7 +29,9 @@ import org.springframework.context.annotation.*;
   setImage(products,"pecan","/images/pecan.png");
   setImage(products,"rosemary","/images/rosemary.png");
   setImage(products,"lemon","/images/lemon.png");
+  setDetails(products,"leek-leaves","עלי ליק בתפזורת","עלי ליק טריים בתפזורת.","חסות ועלים ירוקים",null);
  };}
  private static void add(ProductRepository products,StoreProductRepository offers,DistributionPoint store,String id,String name,String category,String description,String imageUrl,String price){Product product=products.findById(id).orElseGet(()->new Product(id,name,description,category,imageUrl,new BigDecimal(price),true,null));product.setImageUrl(imageUrl);products.save(product);offers.save(new StoreProduct(store,product,new BigDecimal(price),true,null));}
  private static void setImage(ProductRepository products,String id,String imageUrl){products.findById(id).ifPresent(product->{product.setImageUrl(imageUrl);products.save(product);});}
+ private static void setDetails(ProductRepository products,String id,String name,String description,String category,String imageUrl){products.findById(id).ifPresent(product->{product.updateCatalogDetails(name,description,category,imageUrl);products.save(product);});}
 }

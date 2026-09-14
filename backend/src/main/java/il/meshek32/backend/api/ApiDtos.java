@@ -14,6 +14,7 @@ public final class ApiDtos {
  public record StoreResponse(String id, String slug, String locality, String name, String details, String aboutText) { }
  public record StoreCatalogResponse(StoreResponse store, List<ProductResponse> products) { }
  public record AdminStoreProductRequest(@NotBlank @Size(max=120) String name, @NotBlank @Size(max=400) String description, @NotBlank @Size(max=80) String category, @Size(max=1000) String imageUrl, @NotNull @DecimalMin("0.01") BigDecimal price, boolean available, @Min(1) Integer maxQuantity) { }
+ public record ImageUploadResponse(String imageUrl) { }
  public record OrderItemRequest(@NotBlank String productId, @Min(1) @Max(100) int quantity) { }
  public record CreateOrderRequest(@Valid @NotNull CustomerRequest customer, @NotBlank String distributionPointId, @NotEmpty List<@Valid OrderItemRequest> items, @NotNull PaymentMethod paymentMethod) { }
  public record OrderItemResponse(String productId, String productName, BigDecimal unitPrice, int quantity) { }

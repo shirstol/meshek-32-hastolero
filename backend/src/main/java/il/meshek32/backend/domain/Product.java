@@ -13,6 +13,7 @@ public class Product {
  private Integer maxQuantity;
  protected Product(){}
  public Product(String id,String name,String description,String category,String imageUrl,BigDecimal price,boolean available,Integer maxQuantity){this.id=id;this.name=name;this.description=description;this.category=category;this.imageUrl=imageUrl;this.price=price;this.available=available;this.maxQuantity=maxQuantity;}
+ public void updateCatalogDetails(String name,String description,String category,String imageUrl){this.name=name;this.description=description;this.category=category;this.imageUrl=imageUrl;}
  public void setImageUrl(String imageUrl){this.imageUrl=imageUrl;}
  public String getId(){return id;} public String getName(){return name;} public String getDescription(){return description;} public String getCategory(){return category;} public String getImageUrl(){return imageUrl;} public BigDecimal getPrice(){return price;} public boolean isAvailable(){return available;} public Integer getMaxQuantity(){return maxQuantity;}
 }
