@@ -2,7 +2,9 @@ import type { Dashboard, Order, OrderStatus, PaymentMethod, StoreCatalog } from 
 import type { DistributionPoint } from '../types/distributionPoint'
 import type { Product } from '../types/product'
 
-const API_URL = 'http://127.0.0.1:8080/api'
+// Locally this is the Java server running on this computer. On a public host,
+// Vite replaces VITE_API_URL during the build with the public server address.
+const API_URL = (import.meta.env.VITE_API_URL || 'http://127.0.0.1:8080/api').replace(/\/$/, '')
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const response = await fetch(`${API_URL}${path}`, { ...options, headers: { 'Content-Type': 'application/json', ...options?.headers } })
