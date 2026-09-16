@@ -54,7 +54,7 @@ npm.cmd run dev
 
 לפני הפרסום מגדירים בשירות האחסון:
 
-- ב־Backend: `SPRING_PROFILES_ACTIVE=prod`, כתובת PostgreSQL הפנימית של Render בתור `DATABASE_URL`, וכן `ADMIN_USERNAME`, `ADMIN_PASSWORD` ו־`FRONTEND_ORIGIN` (הכתובת החינמית של האתר).
+- ב־Backend: `SPRING_PROFILES_ACTIVE=prod`, פרטי ה־PostgreSQL הפנימיים של Render (`DATABASE_HOST`, `DATABASE_PORT`, `DATABASE_NAME`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`), וכן `ADMIN_USERNAME`, `ADMIN_PASSWORD` ו־`FRONTEND_ORIGIN` (הכתובת החינמית של האתר).
 - ב־Frontend: `VITE_API_URL` עם כתובת ה־Backend הציבורית ואחריה `/api`.
 
 לעולם לא שומרים סיסמת מנהל או פרטי מסד נתונים בקוד או ב־Git. כאשר נרצה להשיק, אפשר לחבר לאותה פריסה דומיין בתשלום בלי לשנות את האתר.
