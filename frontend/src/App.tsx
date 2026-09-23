@@ -55,7 +55,7 @@ function App() {
   if (screen === 'checkout') return <main><AppHeader name={checkout.fullName} quantity={totalQuantity} onHome={() => setScreen('catalog')} /><div className="checkout-layout"><CheckoutForm values={checkout} distributionPoints={points} total={total} submitting={submitting} error={error} onChange={setCheckout} onBack={() => { setError(''); setScreen('catalog') }} onSubmit={() => void confirmOrder()} /><Cart items={cartItems} total={total} onIncrease={increaseQuantity} onDecrease={decreaseQuantity} onContinue={() => undefined} /></div></main>
 
   const categories = [...new Set(products.map((product) => product.category || 'מוצרים נוספים'))]
-  const categoryImage = (category: string) => category === 'חסות ועלים ירוקים' ? '/images/salnova.png' : '/images/lemon.png'
+  const categoryImage = (category: string) => category === 'חסות ועלים ירוקים' ? '/images/category-lettuce.png' : '/images/lemon.png'
 
   if (selectedCategory === null) return <main><AppHeader name={checkout.fullName} quantity={totalQuantity} onHome={() => setScreen('welcome')} /><section className="category-picker"><p className="eyebrow">שלב 2 מתוך 3 · {store?.locality ?? 'מושב ציפורי'}</p><h1>מה תרצי להזמין?</h1><p>בחרי קטגוריה כדי לראות את המוצרים הזמינים בחנות הזו.</p><div className="category-picker__buttons">{categories.map((category) => <button key={category} className="category-picker__button" onClick={() => setSelectedCategory(category)}><img src={categoryImage(category)} alt="" /><span>{category}</span><small>לצפייה במוצרים ←</small></button>)}</div></section></main>
 
